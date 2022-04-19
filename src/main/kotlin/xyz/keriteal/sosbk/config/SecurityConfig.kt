@@ -36,6 +36,6 @@ open class SecurityConfig @Autowired constructor(
             .anyRequest()
             .authenticated()
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter::class.java)
-            .addFilter(apiSignFilter)
+        http.addFilterBefore(apiSignFilter, JwtAuthenticationTokenFilter::class.java)
     }
 }
