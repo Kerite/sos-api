@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: "jdbc:mysql://rm-uf60l4pv61u806ih4vo.mysql.rds.aliyuncs.com:3306/sos"
+    username: "root"
+    password: "G8SWUspm7QwaNR"
+  cache:
+    type: redis
+  jpa:
+    open-in-view: false
+  redis:
+    host: "r-bp1dgvgnvejvo4w6y8pd.redis.rds.aliyuncs.com"
+    username: "r-bp1dgvgnvejvo4w6y8"
+    password: "sz4DEEbtP5dt7g"
+    database: 1
