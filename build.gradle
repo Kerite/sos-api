@@ -75,7 +75,7 @@ docker {
     springBootApplication {
         baseImage = 'azul/zulu-openjdk-alpine:15'
         ports = [ 8080 ]
-        images = ["keriteal/sos-api:$version"]
+        images = ["keriteal/sos-api:latest"]
         jvmArgs = [
                 "-Dspring.profiles.active=production",
                 '-Xmx1024m',
