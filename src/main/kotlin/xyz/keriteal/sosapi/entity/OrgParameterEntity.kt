@@ -14,4 +14,4 @@ class OrgParameterEntity(
     @Column var value: String,
     @Column var createTime: LocalDateTime = LocalDateTime.now(),
     @Column var updateTime: LocalDateTime = LocalDateTime.now()
-) : AbstractPersistable<Long>()
+) : AbstractEntity()

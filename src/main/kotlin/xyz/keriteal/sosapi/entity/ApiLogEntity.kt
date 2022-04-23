@@ -17,4 +17,4 @@ class ApiLogEntity(
     @Column var requestIp: String,
     @CreatedDate
     @Column(updatable = false) var createTime: LocalDateTime = LocalDateTime.now()
-) : AbstractPersistable<Long>()
+) : AbstractEntity()

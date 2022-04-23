@@ -19,4 +19,4 @@ class CourseEntity(
     var createTime: LocalDateTime = LocalDateTime.now(),
     @LastModifiedDate
     @Column var updateTime: LocalDateTime = LocalDateTime.now()
-) : AbstractPersistable<Long>() {}
+) : AbstractEntity() {}

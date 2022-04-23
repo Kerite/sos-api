@@ -24,4 +24,4 @@ class LessonEntity(
     @LastModifiedDate
     @Column(nullable = false)
     var updateTime: LocalDateTime = LocalDateTime.now()
-) : AbstractPersistable<Long>()
+) : AbstractEntity()

@@ -20,4 +20,4 @@ class QuestionEntity(
     @Column(nullable = false) var createTime: LocalDateTime = LocalDateTime.now(),
     @LastModifiedDate
     @Column(nullable = false) var updateTime: LocalDateTime = LocalDateTime.now()
-) : AbstractPersistable<Long>() {}
+) : AbstractEntity() {}

@@ -14,4 +14,4 @@ class OrganizationEntity(
 
     @Transient
     var users: List<UserEntity>
-) : AbstractPersistable<Long>()
+) : AbstractEntity()

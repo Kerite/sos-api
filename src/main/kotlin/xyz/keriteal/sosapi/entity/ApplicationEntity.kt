@@ -11,4 +11,4 @@ class ApplicationEntity(
     @Column(name = "key", nullable = false) var appKey: String,
     @Column(name = "secret", nullable = false) var appSecret: String,
     @Column(nullable = false) var jwtKey: String
-) : AbstractPersistable<Long>() {}
+) : AbstractEntity() {}

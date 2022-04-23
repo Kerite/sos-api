@@ -17,4 +17,4 @@ class AnswerEntity(
 
     @CreatedDate
     @Column var answerTime: LocalDateTime = LocalDateTime.now()
-) : AbstractPersistable<Long>() {}
+) : AbstractEntity() {}

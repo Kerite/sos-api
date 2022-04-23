@@ -34,7 +34,7 @@ class JwtAuthenticationTokenFilter @Autowired constructor(
         filterChain: FilterChain
     ) {
         val authHeader = response.getHeader(HttpHeaders.AUTHORIZATION)
-        if (authHeader.isNotBlank() && authHeader.startsWith(JWT_HEADER)) {
+        if (!authHeader.isNullOrBlank() && authHeader.startsWith(JWT_HEADER)) {
             val authToken = authHeader.substring(JWT_HEADER.length)
             val username = JwtUtil.getUsernameFromToken(authToken)
             if (!username.isNullOrBlank() && SecurityContextHolder.getContext().authentication == null) {

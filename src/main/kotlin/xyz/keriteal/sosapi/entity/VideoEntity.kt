@@ -19,4 +19,4 @@ class VideoEntity(
     @CreatedDate
     @Column(nullable = false, updatable = false)
     var uploadTime: LocalDateTime = LocalDateTime.now()
-) : AbstractPersistable<Long>() {}
+) : AbstractEntity()

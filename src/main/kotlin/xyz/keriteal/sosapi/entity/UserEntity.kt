@@ -21,4 +21,4 @@ class UserEntity(
     var registerTime: LocalDateTime = LocalDateTime.now(),
 
     @Transient var organizations: List<OrganizationEntity> = listOf()
-) : AbstractPersistable<Long>()
+) : AbstractEntity()

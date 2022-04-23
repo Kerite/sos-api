@@ -21,7 +21,6 @@ import xyz.keriteal.sosapi.utils.ipAddress
 class ApiCallLogAspect @Autowired constructor(
     private val logRepository: ApiLogRepository
 ) {
-
     @Pointcut("@annotation(xyz.keriteal.sosapi.annotation.ApiCallLog)")
     fun pointCut() = Unit
 

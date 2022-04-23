@@ -3,6 +3,7 @@ package xyz.keriteal.sosapi.service
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import xyz.keriteal.sosapi.SosException
 import xyz.keriteal.sosapi.constants.Constants
 import xyz.keriteal.sosapi.constants.ParameterConstants
@@ -43,6 +44,7 @@ class AuthService @Autowired constructor(
         )
     }
 
+    @Transactional
     fun register(request: RegisterRequest) {
         val allowRegister = parameterService.getAppParameter(
             ALLOW_REGISTER, "true"

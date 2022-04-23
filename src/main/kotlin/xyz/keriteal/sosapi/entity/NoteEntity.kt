@@ -9,7 +9,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "note")
-data class NoteEntity(
+class NoteEntity(
     @Column(name = "course_id", nullable = false)
     var courseId: Long? = null,
 
@@ -32,19 +32,4 @@ data class NoteEntity(
     @LastModifiedDate
     @Column(name = "update_time", nullable = false)
     var updateTime: LocalDateTime? = null
-) : AbstractPersistable<Long>() {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as NoteEntity
-
-        return id != null && id == other.id
-    }
-
-    override fun hashCode(): Int = javaClass.hashCode()
-
-    @Override
-    override fun toString(): String {
-        return this::class.simpleName + "(id = $id , courseId = $courseId , lessonNumber = $lessonNumber , createrID = $createrID , recommend = $recommend , content = $content , createTime = $createTime , updateTime = $updateTime )"
-    }
-}
+) : AbstractEntity()

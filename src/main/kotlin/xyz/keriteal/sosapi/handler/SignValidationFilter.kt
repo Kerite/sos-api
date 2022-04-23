@@ -1,17 +1,20 @@
 package xyz.keriteal.sosapi.handler
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.apache.commons.codec.digest.Md5Crypt
+import org.apache.http.entity.ContentType
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Component
+import org.springframework.util.StreamUtils
 import org.springframework.web.filter.OncePerRequestFilter
-import org.springframework.web.servlet.HandlerExceptionResolver
 import xyz.keriteal.sosapi.SosException
 import xyz.keriteal.sosapi.config.ProfileProperties
 import xyz.keriteal.sosapi.enum.ApiResult
 import xyz.keriteal.sosapi.repository.ApplicationRepository
+import xyz.keriteal.sosapi.utils.MultiplexRequestWrapper
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletRequestWrapper
 import javax.servlet.http.HttpServletResponse
 
 /**
@@ -23,9 +26,8 @@ import javax.servlet.http.HttpServletResponse
 @Component
 class SignValidationFilter @Autowired constructor(
     private val applicationRepository: ApplicationRepository,
-    @Qualifier("handlerExceptionResolver")
-    private val resolver: HandlerExceptionResolver,
-    private val profileProperties: ProfileProperties
+    private val profileProperties: ProfileProperties,
+    private val objectMapper: ObjectMapper
 ) : OncePerRequestFilter() {
     companion object {
         const val SIGN_KEY_SIGN = "sign"
@@ -39,21 +41,19 @@ class SignValidationFilter @Autowired constructor(
     ) {
         if (!profileProperties.needSign) {
             filterChain.doFilter(request, response)
-            return
-        }
-        try {
-            val parameterMap = request.parameterMap
+        } else {
+            val parameterMap = mapOf<String, List<String>>()
             val sign = parameterMap[SIGN_KEY_SIGN]
             if (sign.isNullOrEmpty()) {
                 throw SosException(ApiResult.SIGN_MISSING)
             }
-            val trimedMap = parameterMap.filter { (key, _) ->
+            val trimmedMap = parameterMap.filter { (key, _) ->
                 key != SIGN_KEY_SIGN
             }
             val appKey = (parameterMap[SIGN_KEY_APP_KEY]
                 ?: throw SosException(ApiResult.APP_KEY_MISSING))[0]
-            val paramStr = trimedMap.toList().map { (key, valueArray) ->
-                val value = if (valueArray.size == 1) {
+            val paramStr = trimmedMap.toList().map { (key, valueArray) ->
+                return@map if (valueArray.size == 1) {
                     "$key=${valueArray[0]}"
                 } else {
                     valueArray.joinToString("&") {
@@ -68,8 +68,40 @@ class SignValidationFilter @Autowired constructor(
                 throw SosException(ApiResult.SIGN_INVALID)
             }
             filterChain.doFilter(request, response)
-        } catch (e: Exception) {
-            resolver.resolveException(request, response, null, e)
+        }
+    }
+
+    private fun parseParameterList(request: HttpServletRequest): List<String>? {
+        when (request.method.uppercase()) {
+            "GET" -> {
+                return request.parameterMap.toList().map { (key, valueArray) ->
+                    return@map if (valueArray.size == 1) {
+                        "$key=${valueArray[0]}"
+                    } else {
+                        valueArray.joinToString("&") {
+                            "$key[]=$it"
+                        }
+                    }
+                }
+            }
+            "POST" -> {
+                val wrapper = MultiplexRequestWrapper(request)
+                if (!request.contentType.contains(ContentType.APPLICATION_JSON.mimeType)) {
+                    return null
+                }
+                val body = wrapper.body
+                val obj = try {
+                    objectMapper.readValue(body, Map::class.java)
+                } catch (ex: Exception) {
+                    return null
+                }
+                return obj.toList().map {
+                    "${it.first}=${it.second}"
+                }
+            }
+            else -> {
+                return null
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ class ParameterService @Autowired constructor(
 ) {
     fun getAppParameter(paramCode: String, defaultValue: String): String {
         val appCode = applicationService.getAppCode()
-        return getAppParameter(appCode, defaultValue)
+        return getAppParameter(appCode, paramCode, defaultValue)
     }
 
     fun getAppParameter(appCode: String, paramCode: String, defaultValue: String): String {
