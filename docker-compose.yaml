@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  sos-api:
+    image: keriteal/sos-api:latest
+    ports:
+      - ${SOS_WEB_PORT:80}:80
+    networks:
+      - endnet
+    volumes:
+      - type: bind
+        source: ./web-logs
+        target: /var/log
+  sos-redis:
+    image: redis:alpine
+    networks:
+      - endnet
+    command: redis-server --save 60 1
+    volumes:
+      - type: volume
+        source: sos-redis-data
+        target: /data
+
+networks:
+  endnet:
+
+volumes:
+  sos-redis-data:
