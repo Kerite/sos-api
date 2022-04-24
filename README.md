@@ -1,6 +1,6 @@
-![docker status](https://github.com/Kerite/sos-api/actions/workflows/publish.yml/badge.svg)
-![GitHub](https://img.shields.io/github/license/Kerite/sos-api?label=LICENSE)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Kerite/sos-api)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Kerite/sos-api/push-to-docker?label=Push%20to%20docker&logo=Docker)
+![GitHub](https://img.shields.io/github/license/Kerite/sos-api?label=LICENSE&logo=Github)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Kerite/sos-api?logo=Github)
 
 ## Deployment
 
