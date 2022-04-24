@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: "jdbc:mysql://rm-uf60l4pv61u806ih4vo.mysql.rds.aliyuncs.com:3306/sos"
-    username: "root"
-    password: "G8SWUspm7QwaNR"
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASS}
 
 profile:
   needSign: false

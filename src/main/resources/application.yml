@@ -32,7 +32,7 @@ spring:
       add-mappings: false
 
 aliyun:
-  endpoint: oss-cn-hangzhou.aliyuncs.com
-  accessKeyId: LTAI5t724sLwGs1gLMSujqQe
-  accessKeySecret: bEUPuMxDkCvcF8EI16xMFnBHwV7d0d
+  endpoint: ${OSS_ENDPOINT}
+  accessKeyId: ${OSS_ACCESS_KEY_ID}
+  accessKeySecret: ${OSS_ACCESS_KEY_SECRET}
   bucketName: sos-oss
