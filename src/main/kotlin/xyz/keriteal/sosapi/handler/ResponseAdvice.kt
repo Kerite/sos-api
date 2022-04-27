@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageConverter
 import org.springframework.http.server.ServerHttpRequest
 import org.springframework.http.server.ServerHttpResponse
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher
+import org.springframework.util.AntPathMatcher
 import org.springframework.validation.FieldError
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -25,18 +27,31 @@ import xyz.keriteal.sosapi.SosException
 import xyz.keriteal.sosapi.annotation.Logger
 import xyz.keriteal.sosapi.annotation.Logger.Companion.logger
 import xyz.keriteal.sosapi.config.ProfileProperties
+import xyz.keriteal.sosapi.entity.ApiLogEntity
 import xyz.keriteal.sosapi.enum.ApiResult
 import xyz.keriteal.sosapi.model.ApiModel
 import xyz.keriteal.sosapi.model.Failed
 import xyz.keriteal.sosapi.model.Success
+import xyz.keriteal.sosapi.repository.ApiLogRepository
+import xyz.keriteal.sosapi.utils.getRequest
 import java.lang.reflect.Field
 
+/**
+ * 统一所有接口的返回格式
+ * 可能会造成有些接口无法使用，需要配置matchers
+ */
 @Logger
 @RestControllerAdvice
 class ResponseAdvice @Autowired constructor(
     private val objectMapper: ObjectMapper,
-    private val profileProperties: ProfileProperties
+    private val profileProperties: ProfileProperties,
+    private val apiLogRepository: ApiLogRepository
 ) : ResponseBodyAdvice<Any> {
+    val matchers = listOf(
+        AntPathRequestMatcher("/actuator/**"),
+        AntPathRequestMatcher("/v3/api-docs/**")
+    )
+
     override fun supports(returnType: MethodParameter, converterType: Class<out HttpMessageConverter<*>>): Boolean {
         return true
     }
@@ -49,21 +64,17 @@ class ResponseAdvice @Autowired constructor(
         request: ServerHttpRequest,
         response: ServerHttpResponse
     ): Any? {
+        matchers.forEach {
+            if (it.matches(getRequest())) return body
+        }
         if (profileProperties.development && body != null) {
             logger.debug("请求响应Body[${body::class.java}]:$body")
+        } else {
+            logger.debug("请求响应为null")
         }
         if (body is String) {
-            return try {
-                val map = objectMapper.readValue(body, Map::class.java)
-                if (map.containsKey("openapi")) {
-                    objectMapper.writeValueAsString(map)
-                } else {
-                    objectMapper.writeValueAsString(Success(map))
-                }
-            } catch (e: Exception) {
-                response.headers.contentType = MediaType.APPLICATION_JSON
-                objectMapper.writeValueAsString(Success(body))
-            }
+            val map = objectMapper.readValue(body, Map::class.java)
+            objectMapper.writeValueAsString(Success(map))
         }
         if (body is ApiModel) {
             if (body is Failed) {

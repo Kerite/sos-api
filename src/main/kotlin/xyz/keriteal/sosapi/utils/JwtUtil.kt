@@ -5,10 +5,14 @@ import io.github.nefilim.kjwt.ClaimsVerification.expired
 import io.github.nefilim.kjwt.ClaimsVerification.notBefore
 import io.github.nefilim.kjwt.ClaimsVerification.requiredOptionClaim
 import io.github.nefilim.kjwt.ClaimsVerification.validateClaims
+import xyz.keriteal.sosapi.annotation.Logger
+import xyz.keriteal.sosapi.annotation.Logger.Companion.logger
 import xyz.keriteal.sosapi.entity.ApplicationEntity
 import xyz.keriteal.sosapi.model.JwtModel
 import java.util.UUID
 
+
+@Logger
 object JwtUtil {
     const val JWT_HEADER = "Bearer "
     const val CLAIM_USERNAME = "username"
@@ -20,12 +24,15 @@ object JwtUtil {
             validateClaims(notBefore, expired)(claims)
 
         fun standardValidationWithUsername(claims: JWTClaims, username: String): ClaimsValidatorResult =
-            validateClaims(notBefore, expired, username(username))(claims)
+            validateClaims(username(username))(claims)
 
         private fun username(username: String): ClaimsValidator = requiredOptionClaim(
             "username",
             { claimValue("username") },
-            { it == username }
+            {
+                logger.debug("username: $it")
+                it == username
+            }
         )
     }
 
@@ -34,14 +41,20 @@ object JwtUtil {
             ?.claimValue(CLAIM_USERNAME)?.orNull()
     }
 
+    fun getAppKeyFromToken(token: String): String? {
+        return JWT.decode(token).orNull()
+            ?.claimValue(CLAIM_APP_KEY)?.orNull()
+    }
+
     fun createAndSignJwt(jwtModel: JwtModel, application: ApplicationEntity): String? {
-        return JWT.hs256("kid-233".toJWTKeyID()) {
+        logger.debug("Signing Jwt with ${application.jwtKey}")
+        return JWT.hs256() {
             issuer(application.appName)
             claim(CLAIM_USERNAME, jwtModel.username)
             claim(CLAIM_SESSION, UUID.randomUUID().toString())
             claim(CLAIM_APP_KEY, application.appKey)
             issuedNow()
-        }.sign(application.jwtKey).orNull()?.jwt?.encode()
+        }.sign(application.jwtKey).orNull()?.rendered
     }
 }
 

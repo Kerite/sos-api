@@ -1,7 +1,5 @@
 package xyz.keriteal.sosapi.enum
 
-import kotlin.math.log
-
 enum class ApiResult(
     val code: Int,
     val message: String,
@@ -23,7 +21,7 @@ enum class ApiResult(
 
     USERNAME_NOT_FOUND(401, "用户不存在"),
 
-    APP_KEY_NOT_FOUND(403, "appKey不存在"),
+    APPLICATION_NOT_FOUND(403, "app_key对应的application不存在"),
     SIGN_INVALID(403, "sign参数校验失败"),
     REGISTER_NOT_ALLOWED(403, "不允许注册"),
 

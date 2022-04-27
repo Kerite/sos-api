@@ -11,7 +11,4 @@ class OrganizationEntity(
     @Column(nullable = false) var name: String,
     @Column(nullable = false) var createTime: LocalDateTime,
     @Column(nullable = false) var updateTime: LocalDateTime,
-
-    @Transient
-    var users: List<UserEntity>
 ) : AbstractEntity()

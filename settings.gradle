@@ -15,4 +15,4 @@ pluginManagement {
         }
     }
 }
-rootProject.name = 'sos-bk'
+rootProject.name = 'sos-api'

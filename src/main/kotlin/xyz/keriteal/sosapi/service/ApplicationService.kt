@@ -17,7 +17,7 @@ class ApplicationService @Autowired constructor(
         val appKey = request.getParameter(UrlParamConstants.PARAM_APP_KEY)
             ?: throw SosException(ApiResult.APP_KEY_MISSING)
         val app = applicationRepository.findByAppKey(appKey)
-            ?: throw SosException(ApiResult.APP_KEY_NOT_FOUND)
+            ?: throw SosException(ApiResult.APPLICATION_NOT_FOUND)
         return app.appCode
     }
 }

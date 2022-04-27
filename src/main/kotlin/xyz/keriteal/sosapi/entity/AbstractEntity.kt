@@ -8,20 +8,21 @@ import javax.persistence.*
 @MappedSuperclass
 abstract class AbstractEntity : Persistable<Long> {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var id: Long? = null
+    private var id: Long = -1
 
-    override fun getId(): Long? {
+    override fun getId(): Long {
         return id
     }
 
-    protected fun setId(id: Long?) {
+    protected fun setId(id: Long) {
         this.id = id
     }
 
     @Transient
     override fun isNew(): Boolean {
-        return id == null
+        return id == -1L
     }
 
     override fun equals(other: Any?): Boolean {

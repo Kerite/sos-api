@@ -6,5 +6,7 @@ import xyz.keriteal.sosapi.entity.OrgParameterEntity
 
 @Repository
 interface OrganizationParameterRepository : CrudRepository<OrgParameterEntity, Long> {
-    fun findByOrgCode(orgCode: String): OrgParameterEntity?
+    fun findByOrgCodeAndKey(orgCode: String, key: String): OrgParameterEntity?
+
+    fun findAllByOrgCodeAndKey(orgCode: String, key: String): List<OrgParameterEntity>
 }

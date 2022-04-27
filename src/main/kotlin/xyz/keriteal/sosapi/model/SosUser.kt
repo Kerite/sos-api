@@ -2,26 +2,22 @@ package xyz.keriteal.sosapi.model
 
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
+import xyz.keriteal.sosapi.entity.UserEntity
 
-class SosUser(
-    private val username: String,
-    private val password: String,
-    private val authority: Collection<GrantedAuthority>,
-    val userId: Long
+data class SosUser(
+    val user: UserEntity
 ) : UserDetails {
-    var expired: Boolean = false
+    private var expired: Boolean = false
 
-    override fun getAuthorities(): Collection<GrantedAuthority> = authority
+    override fun getAuthorities(): Collection<GrantedAuthority> = user.roles
 
-    override fun getPassword() = password
+    override fun getPassword() = user.password
 
-    override fun getUsername() = username
+    override fun getUsername() = user.username
 
     override fun isAccountNonExpired() = !expired
 
-    override fun isAccountNonLocked(): Boolean {
-        return true
-    }
+    override fun isAccountNonLocked(): Boolean = !user.locked
 
     override fun isCredentialsNonExpired(): Boolean {
         return true

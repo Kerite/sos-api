@@ -32,7 +32,7 @@ class OosService @Autowired constructor(
             val userDetails = authentication.principal as SosUser
 
             val videoEntity = VideoEntity(
-                uploader = userDetails.userId,
+                uploader = userDetails.user.id!!,
                 uuid = uuid,
                 videoName = filename
             )

@@ -10,14 +10,12 @@ import xyz.keriteal.sosapi.model.SosUser
 import xyz.keriteal.sosapi.repository.UserRepository
 
 @Service
-class UserDetailService @Autowired constructor(
+class UserService @Autowired constructor(
     private val userRepository: UserRepository
 ) : UserDetailsService {
     override fun loadUserByUsername(username: String): SosUser {
         val user = userRepository.findByUsername(username)
             ?: throw SosException(ApiResult.USERNAME_NOT_FOUND)
-        val authorities = AuthorityUtils.createAuthorityList("USER")
-
-        return SosUser(user.username, user.password, authorities, user.id!!)
+        return SosUser(user)
     }
 }

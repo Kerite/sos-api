@@ -5,7 +5,6 @@ import org.apache.commons.codec.digest.Md5Crypt
 import org.apache.http.entity.ContentType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import org.springframework.util.StreamUtils
 import org.springframework.web.filter.OncePerRequestFilter
 import xyz.keriteal.sosapi.SosException
 import xyz.keriteal.sosapi.config.ProfileProperties
@@ -14,7 +13,6 @@ import xyz.keriteal.sosapi.repository.ApplicationRepository
 import xyz.keriteal.sosapi.utils.MultiplexRequestWrapper
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletRequestWrapper
 import javax.servlet.http.HttpServletResponse
 
 /**
@@ -39,9 +37,7 @@ class SignValidationFilter @Autowired constructor(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        if (!profileProperties.needSign) {
-            filterChain.doFilter(request, response)
-        } else {
+        if (profileProperties.needSign) {
             val parameterMap = mapOf<String, List<String>>()
             val sign = parameterMap[SIGN_KEY_SIGN]
             if (sign.isNullOrEmpty()) {
@@ -62,13 +58,14 @@ class SignValidationFilter @Autowired constructor(
                 }
             }.joinToString("&")
             val application = applicationRepository.findByAppKey(appKey)
-                ?: throw SosException(ApiResult.APP_KEY_NOT_FOUND)
+                ?: throw SosException(ApiResult.APPLICATION_NOT_FOUND)
             val queryWithSign = paramStr + application.appSecret
             if (!Md5Crypt.md5Crypt(queryWithSign.toByteArray()).equals(sign[0])) {
                 throw SosException(ApiResult.SIGN_INVALID)
             }
-            filterChain.doFilter(request, response)
+            logger.debug("Sign校验完毕")
         }
+        filterChain.doFilter(request, response)
     }
 
     private fun parseParameterList(request: HttpServletRequest): List<String>? {

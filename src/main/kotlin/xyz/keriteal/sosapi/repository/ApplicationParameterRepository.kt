@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository
 import xyz.keriteal.sosapi.entity.AppParameterEntity
 
 @Repository
-interface AppParameterRepository : CrudRepository<AppParameterEntity, Long> {
+interface ApplicationParameterRepository : CrudRepository<AppParameterEntity, Long> {
     fun findByAppCode(appCode: String): AppParameterEntity?
 }

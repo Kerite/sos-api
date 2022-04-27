@@ -11,9 +11,9 @@ import javax.persistence.Table
 @Entity
 class ApiLogEntity(
     @Column var tag: String,
-    @Column var requestBody: String,
-    @Column var exception: String,
-    @Column var responseBody: String,
+    @Column(nullable = true) var requestBody: String,
+    @Column(nullable = true) var exception: String?,
+    @Column(nullable = true) var responseBody: String?,
     @Column var requestIp: String,
     @CreatedDate
     @Column(updatable = false) var createTime: LocalDateTime = LocalDateTime.now()

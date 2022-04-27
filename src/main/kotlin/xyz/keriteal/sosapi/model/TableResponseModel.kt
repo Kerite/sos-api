@@ -1,6 +1,6 @@
 package xyz.keriteal.sosapi.model
 
-data class TableResponse<T>(
+data class TableResponseModel<T>(
     val pageSize: Int,
     val pageCount: Int,
     val currentPage: Int,

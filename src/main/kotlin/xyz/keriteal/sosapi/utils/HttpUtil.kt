@@ -14,19 +14,19 @@ object HttpUtil {
 
 fun HttpServletRequest.ipAddress(): String {
     var ipAddress = getHeader("X-Forwarded-For")
-        .notBlankOr {
+        ?.notBlankOr {
             getHeader("Proxy-Client-IP")
-        }.notBlankOr {
+        }?.notBlankOr {
             getHeader("WL-Proxy-Client-IP")
-        }.notBlankOr {
+        }?.notBlankOr {
             getHeader("HTTP_CLIENT_IP")
-        }.notBlankOr {
+        }?.notBlankOr {
             getHeader("X-Real-IP")
-        }
+        }?:"unknown"
     if (ipAddress.isNotBlank()) {
         ipAddress = ipAddress.split(",")[0]
     }
-    if (ipAddress.isNotBlank()) {
+    if (ipAddress.isBlank()) {
         ipAddress = remoteAddr
     }
     return ipAddress

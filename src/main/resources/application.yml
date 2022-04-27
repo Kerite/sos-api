@@ -16,7 +16,9 @@ spring:
   jpa:
     open-in-view: false
     database: mysql
-    hibernate:
+  jackson:
+    time-zone: GMT+8
+    property-naming-strategy: SNAKE_CASE
   #ddl-auto: validate
   #show-sql: true
 
