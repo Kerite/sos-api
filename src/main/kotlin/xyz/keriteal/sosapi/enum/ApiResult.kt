@@ -25,6 +25,8 @@ enum class ApiResult(
     SIGN_INVALID(403, "sign参数校验失败"),
     REGISTER_NOT_ALLOWED(403, "不允许注册"),
 
+    USER_NOT_FOUND(404, "用户不存在"),
+
     CONFLICT_USER(409, "用户已存在"),
 
     JWT_SIGN_FAILED(500, "jwt签名失败", log = true);

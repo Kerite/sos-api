@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import xyz.keriteal.sosapi.SosException
 import xyz.keriteal.sosapi.annotation.Logger
 import xyz.keriteal.sosapi.annotation.Logger.Companion.logger
 import xyz.keriteal.sosapi.constants.ParameterConstants
@@ -12,6 +11,7 @@ import xyz.keriteal.sosapi.constants.ParameterConstants.ALLOW_REGISTER
 import xyz.keriteal.sosapi.constants.ParameterConstants.PASSWORD_REGEX
 import xyz.keriteal.sosapi.entity.UserEntity
 import xyz.keriteal.sosapi.enum.ApiResult
+import xyz.keriteal.sosapi.exception.SosException
 import xyz.keriteal.sosapi.model.JwtModel
 import xyz.keriteal.sosapi.model.request.LoginRequest
 import xyz.keriteal.sosapi.model.request.RegisterRequest

@@ -18,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import xyz.keriteal.sosapi.constants.Constants
 import xyz.keriteal.sosapi.enum.ApiResult
-import xyz.keriteal.sosapi.handler.SignValidationFilter
 import xyz.keriteal.sosapi.handler.JwtAuthenticationTokenFilter
 import xyz.keriteal.sosapi.model.Failed
 
@@ -26,7 +25,6 @@ import xyz.keriteal.sosapi.model.Failed
 @EnableWebSecurity
 class SecurityConfig @Autowired constructor(
     private val jwtAuthenticationTokenFilter: JwtAuthenticationTokenFilter,
-    private val signValidationFilter: SignValidationFilter,
     private val objectMapper: ObjectMapper
 ) : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity?) {

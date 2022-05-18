@@ -6,9 +6,9 @@ import org.apache.http.entity.ContentType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
-import xyz.keriteal.sosapi.SosException
 import xyz.keriteal.sosapi.config.ProfileProperties
 import xyz.keriteal.sosapi.enum.ApiResult
+import xyz.keriteal.sosapi.exception.SosException
 import xyz.keriteal.sosapi.repository.ApplicationRepository
 import xyz.keriteal.sosapi.utils.MultiplexRequestWrapper
 import javax.servlet.FilterChain

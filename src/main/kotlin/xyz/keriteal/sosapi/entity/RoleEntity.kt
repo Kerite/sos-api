@@ -1,15 +1,14 @@
 package xyz.keriteal.sosapi.entity
 
 import org.springframework.security.core.GrantedAuthority
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.ManyToMany
+import javax.persistence.Table
 
 @Entity
 @Table(name = "role")
 class RoleEntity(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null,
-
     @Column(name = "name", nullable = false, updatable = false)
     val name: String,
 
@@ -18,7 +17,7 @@ class RoleEntity(
 
     @ManyToMany(mappedBy = "roles")
     val users: MutableSet<UserEntity> = mutableSetOf()
-) : GrantedAuthority {
+) : GrantedAuthority, AbstractEntity() {
     override fun getAuthority(): String {
         return name
     }

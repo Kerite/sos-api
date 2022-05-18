@@ -2,7 +2,6 @@ package xyz.keriteal.sosapi.entity
 
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
-import org.springframework.data.jpa.domain.AbstractPersistable
 import java.time.LocalDateTime
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -24,4 +23,4 @@ class LessonEntity(
     @LastModifiedDate
     @Column(nullable = false)
     var updateTime: LocalDateTime = LocalDateTime.now()
-) : AbstractEntity()
+) : AbstractEntity() {}

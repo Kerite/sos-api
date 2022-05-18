@@ -1,6 +1,5 @@
 package xyz.keriteal.sosapi.entity
 
-import org.springframework.data.jpa.domain.AbstractPersistable
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -11,4 +10,7 @@ class OrganizationEntity(
     @Column(nullable = false) var name: String,
     @Column(nullable = false) var createTime: LocalDateTime,
     @Column(nullable = false) var updateTime: LocalDateTime,
+    @OneToMany
+    @JoinColumn(name = "org_code")
+    var parameters: MutableSet<OrgParameterEntity> = mutableSetOf()
 ) : AbstractEntity()

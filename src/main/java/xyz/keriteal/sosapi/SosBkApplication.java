@@ -6,6 +6,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import xyz.keriteal.sosapi.config.OssProperties;
 import xyz.keriteal.sosapi.config.ProfileProperties;
 
+/**
+ * @author Kerit
+ */
 @SpringBootApplication
 @EnableConfigurationProperties({ProfileProperties.class, OssProperties.class})
 public class SosBkApplication {

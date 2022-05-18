@@ -1,6 +1,5 @@
 package xyz.keriteal.sosapi.entity
 
-import org.springframework.data.jpa.domain.AbstractPersistable
 import javax.persistence.*
 
 @Entity
@@ -10,5 +9,8 @@ class ApplicationEntity(
     @Column(name = "name", nullable = false) var appName: String,
     @Column(name = "key", nullable = false) var appKey: String,
     @Column(name = "secret", nullable = false) var appSecret: String,
-    @Column(nullable = false) var jwtKey: String
-) : AbstractEntity() {}
+    @Column(nullable = false) var jwtKey: String,
+    @OneToMany
+    @JoinColumn(name = "app_code")
+    var parameters: MutableSet<AppParameterEntity> = mutableSetOf()
+) : AbstractEntity()

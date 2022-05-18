@@ -1,7 +1,10 @@
 package xyz.keriteal.sosapi.handler
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import io.github.nefilim.kjwt.*
+import io.github.nefilim.kjwt.JWSHMAC256Algorithm
+import io.github.nefilim.kjwt.JWSRSA256Algorithm
+import io.github.nefilim.kjwt.JWT
+import io.github.nefilim.kjwt.verifySignature
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
@@ -11,12 +14,11 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
 import org.springframework.stereotype.Component
-import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.filter.OncePerRequestFilter
-import xyz.keriteal.sosapi.SosException
 import xyz.keriteal.sosapi.annotation.Logger
 import xyz.keriteal.sosapi.constants.UrlParamConstants.PARAM_APP_KEY
 import xyz.keriteal.sosapi.enum.ApiResult
+import xyz.keriteal.sosapi.exception.SosException
 import xyz.keriteal.sosapi.repository.ApplicationRepository
 import xyz.keriteal.sosapi.service.UserService
 import xyz.keriteal.sosapi.utils.JwtUtil

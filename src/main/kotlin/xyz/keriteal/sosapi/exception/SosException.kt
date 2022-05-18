@@ -1,4 +1,4 @@
-package xyz.keriteal.sosapi
+package xyz.keriteal.sosapi.exception
 
 import xyz.keriteal.sosapi.enum.ApiResult
 
