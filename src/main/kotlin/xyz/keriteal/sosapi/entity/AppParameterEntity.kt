@@ -19,4 +19,4 @@ class AppParameterEntity(
     @LastModifiedDate
     @Column(name = "update_time")
     var updateTime: LocalDateTime = LocalDateTime.now()
-) : AbstractEntity() {}
+) : AbstractEntity()

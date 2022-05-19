@@ -9,7 +9,7 @@ import xyz.keriteal.sosapi.annotation.Logger
 import xyz.keriteal.sosapi.annotation.Logger.Companion.logger
 import xyz.keriteal.sosapi.entity.ApplicationEntity
 import xyz.keriteal.sosapi.model.JwtModel
-import java.util.UUID
+import java.util.*
 
 
 @Logger
@@ -48,7 +48,7 @@ object JwtUtil {
 
     fun createAndSignJwt(jwtModel: JwtModel, application: ApplicationEntity): String? {
         logger.debug("Signing Jwt with ${application.jwtKey}")
-        return JWT.hs256() {
+        return JWT.hs256 {
             issuer(application.appName)
             claim(CLAIM_USERNAME, jwtModel.username)
             claim(CLAIM_SESSION, UUID.randomUUID().toString())

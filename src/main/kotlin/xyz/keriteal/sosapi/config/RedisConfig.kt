@@ -17,7 +17,7 @@ import java.time.Duration
 @EnableCaching
 class RedisConfig {
     @Bean
-    open fun redisTemplate(factory: RedisConnectionFactory): RedisTemplate<String, out Any> {
+    fun redisTemplate(factory: RedisConnectionFactory): RedisTemplate<String, out Any> {
         val redisTemplate = RedisTemplate<String, Any>()
         redisTemplate.connectionFactory = factory
         redisTemplate.valueSerializer = GenericJackson2JsonRedisSerializer()
@@ -28,7 +28,7 @@ class RedisConfig {
     }
 
     @Bean
-    open fun redisCachingManager(factory: RedisConnectionFactory): RedisCacheManager {
+    fun redisCachingManager(factory: RedisConnectionFactory): RedisCacheManager {
         val redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
             .serializeValuesWith(
                 RedisSerializationContext.SerializationPair.fromSerializer(

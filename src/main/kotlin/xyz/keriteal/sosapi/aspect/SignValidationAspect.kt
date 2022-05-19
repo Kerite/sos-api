@@ -1,7 +1,6 @@
 package xyz.keriteal.sosapi.aspect
 
 import org.aspectj.lang.JoinPoint
-import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
 import org.aspectj.lang.annotation.Pointcut
@@ -24,7 +23,7 @@ class SignValidationAspect @Autowired constructor(
         if (arg0 !is RequestModel) {
             return
         }
-        val requestModel = arg0 as RequestModel
+        val requestModel = arg0
         val sign = requestModel.sign
         
     }

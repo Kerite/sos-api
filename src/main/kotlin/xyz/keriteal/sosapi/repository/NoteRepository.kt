@@ -5,5 +5,4 @@ import org.springframework.stereotype.Repository
 import xyz.keriteal.sosapi.entity.NoteEntity
 
 @Repository
-interface NoteRepository : CrudRepository<NoteEntity, Long> {
-}
+interface NoteRepository : CrudRepository<NoteEntity, Long>

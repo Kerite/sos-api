@@ -5,5 +5,4 @@ import org.springframework.stereotype.Repository
 import xyz.keriteal.sosapi.entity.ApiLogEntity
 
 @Repository
-interface ApiLogRepository : CrudRepository<ApiLogEntity, Long> {
-}
+interface ApiLogRepository : CrudRepository<ApiLogEntity, Long>

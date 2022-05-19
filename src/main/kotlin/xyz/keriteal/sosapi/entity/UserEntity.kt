@@ -40,4 +40,4 @@ class UserEntity(
         inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")]
     )
     var roles: MutableSet<RoleEntity> = mutableSetOf()
-): AbstractEntity() {}
+): AbstractEntity()

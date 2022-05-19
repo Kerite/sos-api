@@ -21,4 +21,4 @@ class AnswerEntity(
     @CreatedDate
     @Column(name = "answer_time")
     var answerTime: LocalDateTime = LocalDateTime.now()
-) : AbstractEntity() {}
+) : AbstractEntity()

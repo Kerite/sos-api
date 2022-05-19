@@ -1,11 +1,11 @@
 package xyz.keriteal.sosapi
 
 import io.github.nefilim.kjwt.*
+import io.github.nefilim.kjwt.JWT.Companion.hs256
 import org.junit.jupiter.api.Test
 import xyz.keriteal.sosapi.entity.ApplicationEntity
 import xyz.keriteal.sosapi.model.JwtModel
 import xyz.keriteal.sosapi.utils.JwtUtil
-import io.github.nefilim.kjwt.JWT.Companion.hs256
 import java.time.LocalDateTime
 
 class SosApiTests {
@@ -31,14 +31,14 @@ class SosApiTests {
     @Test
     fun `test kjwwt2`() {
         val secret = "51sdf6a1f56sda4f4dfs6a4f"
-        val jwt = hs256() {
+        val jwt = hs256 {
             issuedAt(LocalDateTime.now())
             claim("username", "kerit")
         }.sign(secret).orNull()
         val token = jwt!!.rendered
         println("Rendered Token:$token")
         println("Signed Token: ${jwt.jwt.encode()}")
-        val validated = verifySignature<JWSHMACAlgorithm>(jwt?.rendered!!, secret).orNull()
+        val validated = verifySignature<JWSHMACAlgorithm>(jwt.rendered, secret).orNull()
         val result = JwtUtil.JwtValidation.standardValidationWithUsername(validated!!, "kerit")
         println("$validated")
         println("result: ${result.isValid}")

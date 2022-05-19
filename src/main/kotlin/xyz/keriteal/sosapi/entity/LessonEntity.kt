@@ -23,4 +23,4 @@ class LessonEntity(
     @LastModifiedDate
     @Column(nullable = false)
     var updateTime: LocalDateTime = LocalDateTime.now()
-) : AbstractEntity() {}
+) : AbstractEntity()

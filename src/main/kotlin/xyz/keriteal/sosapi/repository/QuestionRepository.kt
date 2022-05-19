@@ -5,5 +5,4 @@ import org.springframework.stereotype.Repository
 import xyz.keriteal.sosapi.entity.QuestionEntity
 
 @Repository
-interface QuestionRepository : CrudRepository<QuestionEntity, Long> {
-}
+interface QuestionRepository : CrudRepository<QuestionEntity, Long>

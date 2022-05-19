@@ -9,7 +9,7 @@ import xyz.keriteal.sosapi.config.OssProperties
 import xyz.keriteal.sosapi.entity.VideoEntity
 import xyz.keriteal.sosapi.model.SosUser
 import xyz.keriteal.sosapi.repository.VideoRepository
-import java.util.UUID
+import java.util.*
 
 @Service
 class OosService @Autowired constructor(
@@ -32,7 +32,7 @@ class OosService @Autowired constructor(
             val userDetails = authentication.principal as SosUser
 
             val videoEntity = VideoEntity(
-                uploader = userDetails.user.id!!,
+                uploader = userDetails.user.id,
                 uuid = uuid,
                 videoName = filename
             )
