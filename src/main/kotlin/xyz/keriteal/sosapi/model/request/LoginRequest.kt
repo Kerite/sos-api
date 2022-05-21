@@ -11,5 +11,9 @@ data class LoginRequest(
     @field:NotBlank(message = "用户名不能为空")
     var username: String,
     @field:NotBlank(message = "密码不能为空")
-    var password: String
+    var password: String,
+    @field:NotBlank(message = "验证码")
+    var captchaCode: String,
+    @field:NotBlank(message = "验证码会话")
+    var captchaSession: String
 ) : RequestModel()

@@ -1,5 +1,13 @@
 package xyz.keriteal.sosapi.enum
 
+/**
+ * API 返回的结果
+ *
+ * @param code 接口返回的 json 中的 code 字段
+ * @param message 接口返回的json中的 message 字段
+ * @param rcStatus ture: 把 code 作为 http 返回码
+ * @param log true: 就算不是在开发模式中也在日志中保存
+ */
 enum class ApiResult(
     val code: Int,
     val message: String,
@@ -29,7 +37,8 @@ enum class ApiResult(
 
     CONFLICT_USER(409, "用户已存在"),
 
-    JWT_SIGN_FAILED(500, "jwt签名失败", log = true);
+    JWT_SIGN_FAILED(500, "jwt签名失败", log = true),
+    APPLICATION_PARAMETER_ERROR(500, "App 配置错误", log = true);
 
     val httpCode: Int
         get() = if (rcStatus) code else 200

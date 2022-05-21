@@ -11,15 +11,15 @@ import javax.persistence.Table
 @Table(name = "note")
 class NoteEntity(
     @Column(name = "course_id", nullable = false)
-    var courseId: Long? = null,
+    var courseId: Int? = null,
 
     @Column(name = "lesson_name", nullable = false)
     var lessonNumber: Int? = null,
 
     @Column(name = "creator_id", nullable = false)
-    var creatorID: Long? = null,
+    var creatorId: Int? = null,
 
-    @Column(name = "recommend_id", nullable = false)
+    @Column(name = "is_recommend", nullable = false)
     var recommend: Boolean? = false,
 
     @Column(name = "content", nullable = false)

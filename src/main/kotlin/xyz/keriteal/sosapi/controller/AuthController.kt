@@ -8,7 +8,9 @@ import xyz.keriteal.sosapi.model.request.AddRolesRequest
 import xyz.keriteal.sosapi.model.request.LoginRequest
 import xyz.keriteal.sosapi.model.request.RegisterRequest
 import xyz.keriteal.sosapi.model.request.RolesRequest
+import xyz.keriteal.sosapi.model.response.CaptchaResponse
 import xyz.keriteal.sosapi.model.response.LoginResponse
+import xyz.keriteal.sosapi.model.response.RegisterResponse
 import xyz.keriteal.sosapi.model.response.RolesResponseItem
 import xyz.keriteal.sosapi.service.AuthService
 import xyz.keriteal.sosapi.service.RoleService
@@ -17,13 +19,14 @@ import xyz.keriteal.sosapi.service.RoleService
 @RequestMapping("/auth")
 class AuthController @Autowired constructor(
     private val authService: AuthService,
-    private val roleService: RoleService
+    private val roleService: RoleService,
 ) {
     @GetMapping("public_key")
     fun publicKey(
         @RequestParam appKey: String,
         @RequestParam appSecret: String
     ) {
+
     }
 
     @PostMapping("login")
@@ -33,9 +36,10 @@ class AuthController @Autowired constructor(
     }
 
     @PostMapping("register")
-    @Operation(description = "注册用户")
-    fun register(@RequestBody request: RegisterRequest) {
-        return authService.register(request)
+    @Operation(method = "POST", description = "注册用户")
+    fun register(@RequestBody request: RegisterRequest): RegisterResponse {
+        authService.register(request)
+        return RegisterResponse("OK")
     }
 
     @GetMapping("roles")
@@ -45,8 +49,14 @@ class AuthController @Autowired constructor(
     }
 
     @PostMapping("roles")
-    @Operation(description = "给用户添加权限")
+    @Operation(method = "POST", description = "给用户添加权限")
     fun addRole(request: AddRolesRequest): Boolean {
         return roleService.addRoles(request.userId, request.roleIds)
+    }
+
+    @GetMapping("captcha")
+    @Operation(method = "GET", description = "获取验证码")
+    fun captcha(): CaptchaResponse {
+        return authService.generateCaptcha()
     }
 }

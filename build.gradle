@@ -35,6 +35,7 @@ ext {
 }
 
 dependencies {
+    // Kotlin Coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
     runtimeOnly 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.1'
 
@@ -44,10 +45,14 @@ dependencies {
     implementation 'commons-fileupload:commons-fileupload:1.4'
     implementation 'io.arrow-kt:arrow-core:1.1.2'
     implementation 'com.aliyun.oss:aliyun-sdk-oss:3.14.1'
+    implementation 'com.aventrix.jnanoid:jnanoid:2.0.0'
+
+    // Spring docs
     implementation "org.springdoc:springdoc-openapi-ui:$springdocVersion"
     implementation "org.springdoc:springdoc-openapi-kotlin:$springdocVersion"
     implementation "org.springdoc:springdoc-openapi-security:$springdocVersion"
 
+    // Spring Boot
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'

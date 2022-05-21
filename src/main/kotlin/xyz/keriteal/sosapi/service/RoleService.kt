@@ -14,7 +14,7 @@ class RoleService @Autowired constructor(
     private val userRepository: UserRepository,
     private val roleRepository: RoleRepository,
 ) {
-    fun listAllRoles(userId: Long): List<RolesResponseItem> {
+    fun listAllRoles(userId: Int): List<RolesResponseItem> {
         val user = userRepository.findById(userId)
         if (user.isPresent) {
             val userEntity = user.get()
@@ -30,7 +30,7 @@ class RoleService @Autowired constructor(
     }
 
     @Transactional
-    fun addRoles(userId: Long, roleIds: Set<Long>): Boolean {
+    fun addRoles(userId: Int, roleIds: Set<Long>): Boolean {
         val user = userRepository.findById(userId)
         if (!user.isPresent) {
             throw SosException(ApiResult.USER_NOT_FOUND)

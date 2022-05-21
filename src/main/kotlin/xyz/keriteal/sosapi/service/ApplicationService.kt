@@ -12,6 +12,9 @@ import xyz.keriteal.sosapi.utils.HttpUtil
 class ApplicationService @Autowired constructor(
     private val applicationRepository: ApplicationRepository
 ) {
+    /**
+     * 获取当前Session的AppCode
+     */
     fun getAppCode(): String {
         val request = HttpUtil.getRequest()
         val appKey = request.getParameter(UrlParamConstants.PARAM_APP_KEY)

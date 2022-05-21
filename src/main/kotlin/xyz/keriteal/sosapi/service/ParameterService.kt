@@ -5,12 +5,18 @@ import org.springframework.stereotype.Service
 import xyz.keriteal.sosapi.repository.ApplicationParameterRepository
 import xyz.keriteal.sosapi.repository.OrganizationParameterRepository
 
+/**
+ * 参数服务，用于获取 App 的参数或者是 Organization 的参数
+ */
 @Service
 class ParameterService @Autowired constructor(
     private val applicationParameterRepository: ApplicationParameterRepository,
     private val organizationParameterRepository: OrganizationParameterRepository,
     private val applicationService: ApplicationService
 ) {
+    /**
+     * 获取应用的参数
+     */
     fun getAppParameter(paramCode: String, defaultValue: String): String {
         val appCode = applicationService.getAppCode()
         return getAppParameter(appCode, paramCode, defaultValue)
@@ -39,7 +45,9 @@ class ParameterService @Autowired constructor(
     }
 
     /**
-     * 获取组织定义的参数列表（即一个code对应了多个值
+     * 获取组织定义的参数列表（即一个code对应了多个值时)
+     *
+     * @param paramCode 参数的名称
      */
     fun getOrgParameterList(orgCode: String, paramCode: String): List<String> {
         return organizationParameterRepository.findAllByOrgCodeAndKey(orgCode, paramCode)
