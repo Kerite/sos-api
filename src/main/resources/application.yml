@@ -13,9 +13,15 @@ spring:
     active: dev
   cache:
     type: redis
+  data:
+    redis:
+      repositories:
+        enabled: false
   jpa:
     open-in-view: false
-    database: mysql
+    database: postgresql
+    hibernate:
+      ddl-auto: update
   jackson:
     time-zone: GMT+8
     property-naming-strategy: SNAKE_CASE

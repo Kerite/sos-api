@@ -3,7 +3,7 @@ package xyz.keriteal.sosapi.service
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import xyz.keriteal.sosapi.enum.ApiResult
+import xyz.keriteal.sosapi.enums.ApiResult
 import xyz.keriteal.sosapi.exception.SosException
 import xyz.keriteal.sosapi.model.response.RolesResponseItem
 import xyz.keriteal.sosapi.repository.RoleRepository

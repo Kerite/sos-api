@@ -1,11 +1,13 @@
 package xyz.keriteal.sosapi.entity
 
+import io.swagger.v3.oas.annotations.media.Schema
 import org.springframework.data.annotation.CreatedDate
 import java.time.LocalDateTime
 import javax.persistence.*
 
-@Table(name = "api_log")
+@Table(name = "sos_api_log")
 @Entity
+@Schema(description = "接口调用日志")
 class ApiLogEntity(
     @Column(length = 50) var tag: String,
     @Column(nullable = true) var requestBody: String,

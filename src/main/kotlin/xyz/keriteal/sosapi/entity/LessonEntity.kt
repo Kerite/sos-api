@@ -8,7 +8,7 @@ import javax.persistence.Entity
 import javax.persistence.Table
 
 @Entity
-@Table(name = "lesson")
+@Table(name = "sos_lesson")
 class LessonEntity(
     @Column(nullable = false) var courseId: Long,
     @Column var videoId: Long,

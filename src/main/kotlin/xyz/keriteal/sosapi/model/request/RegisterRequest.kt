@@ -22,5 +22,5 @@ class RegisterRequest(
     /**
      * 机构列表
      */
-    var organizations: List<Long> = listOf()
+    var organizations: List<Int> = listOf()
 ) : RequestModel()

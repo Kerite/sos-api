@@ -6,9 +6,8 @@ import io.github.nefilim.kjwt.verifySignature
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.redis.core.RedisTemplate
-import org.springframework.security.core.userdetails.UserDetails
 import xyz.keriteal.sosapi.entity.ApplicationEntity
-import xyz.keriteal.sosapi.enum.ApiResult
+import xyz.keriteal.sosapi.enums.ApiResult
 import xyz.keriteal.sosapi.model.JwtModel
 import xyz.keriteal.sosapi.utils.JwtUtil
 import javax.annotation.Resource
@@ -35,10 +34,10 @@ class SosBkApplicationTests {
         val key = "abc233466"
         val username = "kerit"
         val application = ApplicationEntity(
-            appCode = "web",
-            appName = "web",
-            appKey = "303e73aec1f74d81b74b",
-            appSecret = "788b02124330d",
+            code = "web",
+            name = "web",
+            key = "303e73aec1f74d81b74b",
+            secret = "788b02124330d",
             jwtKey = key
         )
         val jwtModel = JwtModel(

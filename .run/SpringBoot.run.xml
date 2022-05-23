@@ -1,0 +1,22 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SpringBoot" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" />
+    <envs>
+      <env name="DB_NAME" value="sos_db" />
+      <env name="DB_PASS" value="sosadmin" />
+      <env name="DB_URL" value="pgm-uf6992ky5tad0194ao.pg.rds.aliyuncs.com" />
+      <env name="DB_USER" value="sos_admin" />
+      <env name="OSS_ACCESS_KEY_ID" value="LTAI5tR5uS2DP7nUa5RSwcev" />
+      <env name="OSS_ACCESS_KEY_SECRET" value="73AjsBHTmuEkL6ZuDnm8m36Tflupfy" />
+      <env name="OSS_ENDPOINT" value="oss-cn-hangzhou.aliyuncs.com" />
+      <env name="DB_PORT" value="5432" />
+      <env name="DB_TYPE" value="postgresql" />
+    </envs>
+    <module name="sos-api.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="xyz.keriteal.sosapi.SosBkApplication" />
+    <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndTriggerFile" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

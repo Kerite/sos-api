@@ -67,8 +67,8 @@ class ResponseAdvice @Autowired constructor(
             logger.debug("请求响应为null")
         }
         if (body is String) {
-            val map = objectMapper.readValue(body, Map::class.java)
-            objectMapper.writeValueAsString(Success(map))
+//            val map = objectMapper.readValue(body, Map::class.java)
+//            objectMapper.writeValueAsString(Success(body))
         }
         if (body is ApiModel) {
             if (body is Failed) {
@@ -103,10 +103,10 @@ class ResponseAdvice @Autowired constructor(
     @ResponseBody
     @ExceptionHandler(SosException::class)
     fun sosException(e: SosException): ApiModel {
-        if (e.result.log || profileProperties.development) {
+        if (e.log || profileProperties.development) {
             logger.error("捕获一个SOS异常: ${e.localizedMessage}", e)
         }
-        return Failed.fromApiResult(e.result)
+        return Failed.fromSosException(e)
     }
 
     /**

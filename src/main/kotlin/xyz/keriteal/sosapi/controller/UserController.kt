@@ -2,11 +2,10 @@ package xyz.keriteal.sosapi.controller
 
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PatchMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import xyz.keriteal.sosapi.constants.Constants
+import xyz.keriteal.sosapi.model.TableResponseModel
+import xyz.keriteal.sosapi.model.response.UserCourseResponseItem
 import xyz.keriteal.sosapi.service.UserService
 
 @RestController
@@ -33,8 +32,12 @@ class UserController @Autowired constructor(
 
     @GetMapping("/users/{userIdOrName}/courses")
     @Operation(summary = "获取用户加入的课程")
-    fun getUserCourses(@PathVariable userIdOrName: String) {
-
+    fun getUserCourses(
+        @PathVariable userIdOrName: String,
+        @RequestParam pageSize: Int,
+        @RequestParam pageIdx: Int
+    ): TableResponseModel<UserCourseResponseItem> {
+        return userService.getUserCourses(userIdOrName, pageSize, pageIdx)
     }
 
     @GetMapping(

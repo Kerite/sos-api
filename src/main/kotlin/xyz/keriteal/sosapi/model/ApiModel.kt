@@ -2,7 +2,8 @@ package xyz.keriteal.sosapi.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.web.servlet.NoHandlerFoundException
-import xyz.keriteal.sosapi.enum.ApiResult
+import xyz.keriteal.sosapi.enums.ApiResult
+import xyz.keriteal.sosapi.exception.SosException
 
 @Suppress("unused")
 sealed class ApiModel {
@@ -28,6 +29,10 @@ data class Failed(
     companion object {
         fun fromApiResult(result: ApiResult): Failed {
             return Failed(code = result.code, message = result.message, apiResult = result)
+        }
+
+        fun fromSosException(e: SosException): Failed {
+            return Failed(code = e.code, message = e.message)
         }
 
         fun fromException(e: Exception): Failed {

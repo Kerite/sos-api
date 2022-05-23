@@ -6,16 +6,15 @@ import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import xyz.keriteal.sosapi.config.OssConfig
 import xyz.keriteal.sosapi.config.OssProperties
-import xyz.keriteal.sosapi.entity.VideoEntity
 import xyz.keriteal.sosapi.model.SosUser
-import xyz.keriteal.sosapi.repository.VideoRepository
+import xyz.keriteal.sosapi.repository.ResourceRepository
 import java.util.*
 
 @Service
 class OosService @Autowired constructor(
     private val ossConfig: OssConfig,
     private val ossProperties: OssProperties,
-    private val videoRepository: VideoRepository
+    private val resourceRepository: ResourceRepository
 ) {
     private val ossClient = ossConfig.ossClient()
 
@@ -30,13 +29,7 @@ class OosService @Autowired constructor(
             val authentication = SecurityContextHolder
                 .getContext().authentication
             val userDetails = authentication.principal as SosUser
-
-            val videoEntity = VideoEntity(
-                uploader = userDetails.user.id,
-                uuid = uuid,
-                videoName = filename
-            )
-            videoRepository.save(videoEntity)
+            // TODO 保存到数据库
             ossClient.putObject(ossProperties.bucketName, uuid, stream)
             return "https://${ossProperties.bucketName}.${ossProperties.endpoint}/$filename"
         }

@@ -7,7 +7,7 @@ import javax.persistence.ManyToMany
 import javax.persistence.Table
 
 @Entity
-@Table(name = "role")
+@Table(name = "sos_role")
 class RoleEntity(
     @Column(name = "name", nullable = false, updatable = false)
     val name: String,

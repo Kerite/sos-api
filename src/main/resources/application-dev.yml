@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USER}
-    password: ${DB_PASS}
+    url: "jdbc:${DB_TYPE:postgresql}://${DB_URL:localhost}:${DB_PORT}/${DB_NAME}"
+    username: "${DB_USER}"
+    password: "${DB_PASS}"
 
 profile:
   needSign: false

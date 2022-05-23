@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import xyz.keriteal.sosapi.config.ProfileProperties
-import xyz.keriteal.sosapi.enum.ApiResult
+import xyz.keriteal.sosapi.enums.ApiResult
 import xyz.keriteal.sosapi.exception.SosException
 import xyz.keriteal.sosapi.repository.ApplicationRepository
 import xyz.keriteal.sosapi.utils.MultiplexRequestWrapper
@@ -57,9 +57,9 @@ class SignValidationFilter @Autowired constructor(
                     }
                 }
             }.joinToString("&")
-            val application = applicationRepository.findByAppKey(appKey)
+            val application = applicationRepository.findByKey(appKey)
                 ?: throw SosException(ApiResult.APPLICATION_NOT_FOUND)
-            val queryWithSign = paramStr + application.appSecret
+            val queryWithSign = paramStr + application.secret
             if (!Md5Crypt.md5Crypt(queryWithSign.toByteArray()).equals(sign[0])) {
                 throw SosException(ApiResult.SIGN_INVALID)
             }

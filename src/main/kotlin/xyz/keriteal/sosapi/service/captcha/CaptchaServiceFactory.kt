@@ -2,7 +2,7 @@ package xyz.keriteal.sosapi.service.captcha
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import xyz.keriteal.sosapi.enum.ApiResult
+import xyz.keriteal.sosapi.enums.ApiResult
 import xyz.keriteal.sosapi.exception.SosException
 
 @Service

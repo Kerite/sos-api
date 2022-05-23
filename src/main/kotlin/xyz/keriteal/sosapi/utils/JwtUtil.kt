@@ -49,10 +49,10 @@ object JwtUtil {
     fun createAndSignJwt(jwtModel: JwtModel, application: ApplicationEntity): String? {
         logger.debug("Signing Jwt with ${application.jwtKey}")
         return JWT.hs256 {
-            issuer(application.appName)
+            issuer(application.name)
             claim(CLAIM_USERNAME, jwtModel.username)
             claim(CLAIM_SESSION, UUID.randomUUID().toString())
-            claim(CLAIM_APP_KEY, application.appKey)
+            claim(CLAIM_APP_KEY, application.key)
             issuedNow()
         }.sign(application.jwtKey).orNull()?.rendered
     }

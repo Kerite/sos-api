@@ -1,4 +1,4 @@
-package xyz.keriteal.sosapi.enum
+package xyz.keriteal.sosapi.enums
 
 /**
  * API 返回的结果
@@ -11,7 +11,7 @@ package xyz.keriteal.sosapi.enum
 enum class ApiResult(
     val code: Int,
     val message: String,
-    val rcStatus: Boolean = false,
+    private val rcStatus: Boolean = false,
     val log: Boolean = false,
 ) {
     RC200(200, "响应成功", true),

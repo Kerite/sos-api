@@ -17,7 +17,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import xyz.keriteal.sosapi.constants.Constants
-import xyz.keriteal.sosapi.enum.ApiResult
+import xyz.keriteal.sosapi.enums.ApiResult
 import xyz.keriteal.sosapi.handler.JwtAuthenticationTokenFilter
 import xyz.keriteal.sosapi.model.Failed
 

@@ -6,7 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import xyz.keriteal.sosapi.dto.CreateNoteDto
 import xyz.keriteal.sosapi.entity.NoteEntity
-import xyz.keriteal.sosapi.enum.ApiResult
+import xyz.keriteal.sosapi.enums.ApiResult
 import xyz.keriteal.sosapi.exception.SosException
 import xyz.keriteal.sosapi.model.TableResponseModel
 import xyz.keriteal.sosapi.model.response.NoteDetailResponse

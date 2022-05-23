@@ -26,11 +26,11 @@ class ParameterService @Autowired constructor(
      * 获取应用的参数
      *
      * @param appCode application表的code
-     * @param paramCode application表的param_code
+     * @param paramKey application表的param_code
      * @param defaultValue 参数的默认值
      */
-    fun getAppParameter(appCode: String, paramCode: String, defaultValue: String): String {
-        val result = applicationParameterRepository.findByAppCode(appCode)
+    fun getAppParameter(appCode: String, paramKey: String, defaultValue: String): String {
+        val result = applicationParameterRepository.findByAppCodeAndKey(appCode, paramKey)
             ?: return defaultValue
         return result.value
     }

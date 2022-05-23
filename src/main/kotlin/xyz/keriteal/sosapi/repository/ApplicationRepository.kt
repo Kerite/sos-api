@@ -6,5 +6,5 @@ import xyz.keriteal.sosapi.entity.ApplicationEntity
 
 @Repository
 interface ApplicationRepository : CrudRepository<ApplicationEntity, Long> {
-    fun findByAppKey(appKey: String): ApplicationEntity?
+    fun findByKey(appKey: String): ApplicationEntity?
 }

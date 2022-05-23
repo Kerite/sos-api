@@ -12,7 +12,7 @@ import xyz.keriteal.sosapi.constants.ParameterConstants
 import xyz.keriteal.sosapi.constants.ParameterConstants.ALLOW_REGISTER
 import xyz.keriteal.sosapi.constants.ParameterConstants.PASSWORD_REGEX
 import xyz.keriteal.sosapi.entity.UserEntity
-import xyz.keriteal.sosapi.enum.ApiResult
+import xyz.keriteal.sosapi.enums.ApiResult
 import xyz.keriteal.sosapi.exception.SosException
 import xyz.keriteal.sosapi.model.JwtModel
 import xyz.keriteal.sosapi.model.SosUser
@@ -46,7 +46,7 @@ class AuthService @Autowired constructor(
         val user = userRepository.findByUsername(request.username)
             ?: throw SosException(ApiResult.USERNAME_NOT_FOUND)
         val jwtModel = JwtModel(username = user.username)
-        val application = applicationRepository.findByAppKey(request.appKey)
+        val application = applicationRepository.findByKey(request.appKey)
             ?: throw SosException(ApiResult.APPLICATION_NOT_FOUND)
         val jwt = JwtUtil.createAndSignJwt(jwtModel, application)
             ?: throw SosException(ApiResult.JWT_SIGN_FAILED)

@@ -8,11 +8,15 @@ import javax.persistence.Entity
 import javax.persistence.Table
 
 @Entity
-@Table(name = "app_parameter")
+@Table(name = "sos_app_parameter")
 class AppParameterEntity(
-    @Column(name = "app_code", nullable = false) var appCode: String,
-    @Column(nullable = false) var key: String,
-    @Column(nullable = false) var value: String,
+    @Column(name = "app_code", nullable = false)
+    var appCode: String,
+    @Column(nullable = false)
+    var key: String,
+    @Column(nullable = false)
+    var value: String,
+
     @CreatedDate
     @Column(name = "create_time", nullable = false, updatable = false)
     var createTime: LocalDateTime = LocalDateTime.now(),

@@ -14,10 +14,10 @@ class SosApiTests {
         val key = "abc233466"
         val username = "kerit"
         val application = ApplicationEntity(
-            appCode = "web",
-            appName = "web",
-            appKey = "303e73aec1f74d81b74b",
-            appSecret = "788b02124330d",
+            code = "web",
+            name = "web",
+            key = "303e73aec1f74d81b74b",
+            secret = "788b02124330d",
             jwtKey = key
         )
         val jwtModel = JwtModel(

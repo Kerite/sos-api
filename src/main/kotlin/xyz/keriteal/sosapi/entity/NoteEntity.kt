@@ -8,7 +8,7 @@ import javax.persistence.Entity
 import javax.persistence.Table
 
 @Entity
-@Table(name = "note")
+@Table(name = "sos_note")
 class NoteEntity(
     @Column(name = "course_id", nullable = false)
     var courseId: Int? = null,
